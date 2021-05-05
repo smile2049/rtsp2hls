@@ -1,4 +1,4 @@
-NAME = rtsp2hls
+NAME = xyz27900/rtsp2hls
 
 .PHONY: docker-build
 docker-build:
