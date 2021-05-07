@@ -3,7 +3,7 @@ version: "3"
 services:
   rtsp2hls:
     build: .
-    image: rtsp2hls
+    image: xyz27900/rtsp2hls
     container_name: rtsp2hls
     ports:
       - 8000:8000

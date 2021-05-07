@@ -6,6 +6,7 @@ import md5 from 'md5';
 import { HLS_PATH, RTMP_SERVICE_URL } from '@/config';
 import { ffmpeg } from '@/modules/ffmpeg';
 import { checkFileExist } from '@/utils/checkFileExist';
+import { writeEndList } from '@/utils/writeEndList';
 
 const app = express();
 
@@ -29,7 +30,13 @@ app.get('/stream', async (req, res) => {
     return;
   }
 
-  ffmpeg(rtsp, `${RTMP_SERVICE_URL}/${hash}`);
+  ffmpeg(rtsp, `${RTMP_SERVICE_URL}/${hash}`, error => {
+    if (error) {
+      console.error(error.data);
+    } else {
+      writeEndList(filePath);
+    }
+  });
 
   const isCreated = await checkFileExist(filePath, 30000);
 
